@@ -1,0 +1,2 @@
+/function ProfilePage/,/^function /{s/auth\.user\.expertise\b/(auth.user?.expertise||'')/g; s/auth\.user\.bio\b/(auth.user?.bio||'')/g; s/auth\.user\.joinedAt\b/(auth.user?.joinedAt||new Date().toISOString())/g}
+w src/App.jsx
