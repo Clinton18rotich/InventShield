@@ -162,7 +162,7 @@ function LanguageSelector({ lang, setLang, dark }) {
 
 function Navbar({ lang, setLang, dark, setDark, notifications, auth }) {
   const [open,setOpen]=useState(false); const bg=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#4b5563'; const nav=useNavigate()
-  return (<nav style={{background:bg,boxShadow:'0 1px 3px rgba(0,0,0,0.1)',position:'sticky',top:0,zIndex:50,padding:'10px 16px'}}><div style={{maxWidth:1200,margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between'}}><Link to="/" style={{display:'flex',alignItems:'center',gap:8,textDecoration:'none'}}><img src="/logo.svg" alt="Logo" style={{width:32,height:32}} /></Link><div style={{display:'flex',alignItems:'center',gap:8}}><button onClick={()=>nav('/help')} style={{background:'none',border:'none',fontSize:16,cursor:'pointer'}}>📚</button><NotificationBell notifications={notifications} dark={dark} lang={lang} /><LanguageSelector lang={lang} setLang={setLang} dark={dark} /><button onClick={()=>setDark(!dark)} style={{background:'none',border:'none',fontSize:18,cursor:'pointer'}}>{dark?'☀️':'🌙'}</button>{auth.isLoggedIn?<><button onClick={()=>nav('/profile')} style={{background:'#eef2ff',border:'none',width:32,height:32,borderRadius:'50%',fontSize:14,fontWeight:'bold',color:'#4f46e5',cursor:'pointer'}}>{auth.user.avatar}</button><button onClick={()=>auth.logout()} style={{fontSize:11,background:'none',border:'none',color:'#ef4444',cursor:'pointer'}}>{T(lang,'logout')}</button></>:<Link to="/login" style={{padding:'6px 14px',borderRadius:8,background:'#4f46e5',color:'white',textDecoration:'none',fontSize:12}}>{T(lang,'login')}</Link>}<button onClick={()=>setOpen(!open)} style={{fontSize:22,background:'none',border:'none',color:txt,cursor:'pointer'}} className="mb">{open?'✕':'☰'}</button></div></div>{open&&<div style={{background:bg,padding:'4px 0',marginTop:8}}>{[{l:T(lang,'dashboard'),p:'/'},{l:T(lang,'discover'),p:'/discover'},{l:T(lang,'addInvention'),p:'/add'},{l:T(lang,'records'),p:'/records'},{l:T(lang,'revenue'),p:'/revenue'},{l:T(lang,'funding'),p:'/funding'},{l:T(lang,'mentors'),p:'/mentors'},{l:T(lang,'legal'),p:'/legal'},{l:T(lang,'certify'),p:'/certify'},{l:'Boost',p:'/boost'},{l:'Share',p:'/share'},{l:'Messages',p:'/messages'},{l:'NDA',p:'/nda'},{l:'Investors',p:'/invest'},{l:'Analytics',p:'/analytics'},{l:T(lang,'global'),p:'/global'}].map(i=><Link key={i.p} to={i.p} onClick={()=>setOpen(false)} style={{display:'block',padding:'14px 16px',color:txt,textDecoration:'none',fontSize:14}}>{i.l}</Link>)}</div>}<style>{`@media(min-width:1024px){.mb{display:none!important}}`}</style></nav>)
+  return (<nav style={{background:bg,boxShadow:'0 1px 3px rgba(0,0,0,0.1)',position:'sticky',top:0,zIndex:50,padding:'10px 16px'}}><div style={{maxWidth:1200,margin:'0 auto',display:'flex',alignItems:'center',justifyContent:'space-between'}}><Link to="/" style={{display:'flex',alignItems:'center',gap:8,textDecoration:'none'}}><img src="/logo.svg" alt="Logo" style={{width:32,height:32}} /></Link><div style={{display:'flex',alignItems:'center',gap:8}}><button onClick={()=>nav('/help')} style={{background:'none',border:'none',fontSize:16,cursor:'pointer'}}>📚</button><NotificationBell notifications={notifications} dark={dark} lang={lang} /><LanguageSelector lang={lang} setLang={setLang} dark={dark} /><button onClick={()=>setDark(!dark)} style={{background:'none',border:'none',fontSize:18,cursor:'pointer'}}>{dark?'☀️':'🌙'}</button>{auth.isLoggedIn?<><button onClick={()=>nav('/profile')} style={{background:'#eef2ff',border:'none',width:32,height:32,borderRadius:'50%',fontSize:14,fontWeight:'bold',color:'#4f46e5',cursor:'pointer'}}>{auth.user.avatar}</button><button onClick={()=>auth.logout()} style={{fontSize:11,background:'none',border:'none',color:'#ef4444',cursor:'pointer'}}>{T(lang,'logout')}</button></>:<Link to="/login" style={{padding:'6px 14px',borderRadius:8,background:'#4f46e5',color:'white',textDecoration:'none',fontSize:12}}>{T(lang,'login')}</Link>}<button onClick={()=>setOpen(!open)} style={{fontSize:22,background:'none',border:'none',color:txt,cursor:'pointer'}} className="mb">{open?'✕':'☰'}</button></div></div>{open&&<div style={{background:bg,padding:'4px 0',marginTop:8}}>{[{l:T(lang,'dashboard'),p:'/'},{l:T(lang,'discover'),p:'/discover'},{l:T(lang,'addInvention'),p:'/add'},{l:T(lang,'records'),p:'/records'},{l:T(lang,'revenue'),p:'/revenue'},{l:T(lang,'funding'),p:'/funding'},{l:T(lang,'mentors'),p:'/mentors'},{l:T(lang,'legal'),p:'/legal'},{l:T(lang,'certify'),p:'/certify'},{l:'Boost',p:'/boost'},{l:'Share',p:'/share'},{l:'Messages',p:'/messages'},{l:'NDA',p:'/nda'},{l:'Ratings',p:'/ratings'},{l:'Export',p:'/export'},{l:'Refer',p:'/refer'},{l:'Calc',p:'/calc'},{l:'Activity',p:'/activity'},{l:'Bookmarks',p:'/bookmarks'},{l:'Compare',p:'/compare'},{l:'Patents',p:'/patents'},{l:'Team',p:'/team'},{l:'Milestones',p:'/milestones'},{l:'Email',p:'/email'},{l:'History',p:'/notifications'},{l:'Investors',p:'/invest'},{l:'Analytics',p:'/analytics'},{l:T(lang,'global'),p:'/global'}].map(i=><Link key={i.p} to={i.p} onClick={()=>setOpen(false)} style={{display:'block',padding:'14px 16px',color:txt,textDecoration:'none',fontSize:14}}>{i.l}</Link>)}</div>}<style>{`@media(min-width:1024px){.mb{display:none!important}}`}</style></nav>)
 }
 
 function MobileBottomNav({ lang, dark }) {
@@ -299,7 +299,7 @@ function AppContent() {
   useEffect(()=>{localStorage.setItem('inventshield_data',JSON.stringify(inv))},[inv])
   useEffect(()=>{localStorage.setItem('inventshield_users',JSON.stringify(users))},[users])
   useEffect(()=>{localStorage.setItem('inventshield_lang',lang)},[lang])
-  return (<Router><Navbar lang={lang} setLang={setLang} dark={dark} setDark={setDark} notifications={notif} auth={auth} /><Routes><Route path="/login" element={<LoginPage users={users} setUsers={setUsers} lang={lang} dark={dark} auth={auth} />} /><Route path="/profile" element={<ProfilePage lang={lang} dark={dark} auth={auth} inventions={inv} users={users} setUsers={setUsers} />} /><Route path="/help" element={<HelpPage lang={lang} dark={dark} />} /><Route path="/" element={<Dashboard inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/discover" element={<DiscoverPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/add" element={<AddInventionPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/records" element={<RecordsPage inventions={inv} lang={lang} dark={dark} />} /><Route path="/revenue" element={<RevenueDashboard inventions={inv} lang={lang} dark={dark} />} /><Route path="/vault/:id" element={<VaultPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/draft/:id" element={<DraftPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/funding" element={<FundingPage lang={lang} dark={dark} />} /><Route path="/mentors" element={<MentorsPage lang={lang} dark={dark} />} /><Route path="/legal" element={<LegalPage lang={lang} dark={dark} />} /><Route path="/certify" element={<CertifyPage lang={lang} dark={dark} />} /><Route path="/analytics" element={<AnalyticsDashboard inventions={inv} lang={lang} dark={dark} />} /><Route path="/boost" element={<BoostCenter inventions={inv} setInventions={setInv} lang={lang} dark={dark} setNotifications={setNotif} />} /><Route path="/share" element={<ShareHub inventions={inv} lang={lang} dark={dark} />} /><Route path="/messages" element={<MessageCenter inventions={inv} lang={lang} dark={dark} auth={auth} />} /><Route path="/nda" element={<NDAHub inventions={inv} lang={lang} dark={dark} />} /><Route path="/invest" element={<InvestorPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/global" element={<GlobalPage lang={lang} dark={dark} />} /></Routes><MobileBottomNav lang={lang} dark={dark} /><AIChatbot lang={lang} dark={dark} /></Router>)
+  return (<Router><Navbar lang={lang} setLang={setLang} dark={dark} setDark={setDark} notifications={notif} auth={auth} /><Routes><Route path="/login" element={<LoginPage users={users} setUsers={setUsers} lang={lang} dark={dark} auth={auth} />} /><Route path="/profile" element={<ProfilePage lang={lang} dark={dark} auth={auth} inventions={inv} users={users} setUsers={setUsers} />} /><Route path="/help" element={<HelpPage lang={lang} dark={dark} />} /><Route path="/" element={<Dashboard inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/discover" element={<DiscoverPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/add" element={<AddInventionPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/records" element={<RecordsPage inventions={inv} lang={lang} dark={dark} />} /><Route path="/revenue" element={<RevenueDashboard inventions={inv} lang={lang} dark={dark} />} /><Route path="/vault/:id" element={<VaultPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/draft/:id" element={<DraftPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/funding" element={<FundingPage lang={lang} dark={dark} />} /><Route path="/mentors" element={<MentorsPage lang={lang} dark={dark} />} /><Route path="/legal" element={<LegalPage lang={lang} dark={dark} />} /><Route path="/certify" element={<CertifyPage lang={lang} dark={dark} />} /><Route path="/analytics" element={<AnalyticsDashboard inventions={inv} lang={lang} dark={dark} />} /><Route path="/boost" element={<BoostCenter inventions={inv} setInventions={setInv} lang={lang} dark={dark} setNotifications={setNotif} />} /><Route path="/share" element={<ShareHub inventions={inv} lang={lang} dark={dark} />} /><Route path="/messages" element={<MessageCenter inventions={inv} lang={lang} dark={dark} auth={auth} />} /><Route path="/nda" element={<NDAHub inventions={inv} lang={lang} dark={dark} />} /><Route path="/ratings" element={<RatingsPage inventions={inv} lang={lang} dark={dark} setNotifications={setNotif} />} /><Route path="/export" element={<PDFExport inventions={inv} lang={lang} dark={dark} />} /><Route path="/refer" element={<ReferralPage lang={lang} dark={dark} setNotifications={setNotif} />} /><Route path="/calc" element={<FundingCalc lang={lang} dark={dark} />} /><Route path="/activity" element={<ActivityFeed inventions={inv} lang={lang} dark={dark} />} /><Route path="/bookmarks" element={<BookmarksPage inventions={inv} lang={lang} dark={dark} />} /><Route path="/compare" element={<ComparePage inventions={inv} lang={lang} dark={dark} />} /><Route path="/patents" element={<PatentSearch lang={lang} dark={dark} />} /><Route path="/team" element={<TeamPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} setNotifications={setNotif} />} /><Route path="/milestones" element={<MilestonesPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} setNotifications={setNotif} />} /><Route path="/email" element={<EmailCenter lang={lang} dark={dark} setNotifications={setNotif} />} /><Route path="/notifications" element={<NotificationHistory lang={lang} dark={dark} />} /><Route path="/invest" element={<InvestorPage inventions={inv} setInventions={setInv} lang={lang} dark={dark} auth={auth} />} /><Route path="/global" element={<GlobalPage lang={lang} dark={dark} />} /></Routes><MobileBottomNav lang={lang} dark={dark} /><AIChatbot lang={lang} dark={dark} /></Router>)
 }
 
 export default function App() { return <ErrorBoundary><AppContent /></ErrorBoundary> }
@@ -470,4 +470,506 @@ function NDAHub({ inventions, lang, dark }) {
     a.click()
   }
   return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:900,margin:'0 auto'}}><h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>📄 NDA Generator</h1><p style={{color:sub,fontSize:13,marginBottom:16}}>Generate Non-Disclosure Agreements to protect your ideas</p><div style={{display:'flex',flexDirection:'column',gap:12}}>{inventions.map(inv=><div key={inv.id} style={{background:cb,borderRadius:12,padding:16,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}><div><h3 style={{fontSize:15,fontWeight:600,color:txt}}>{inv.title}</h3><p style={{fontSize:11,color:sub}}>{inv.inventorName} | {inv.funding}</p></div><button onClick={()=>generateNDA(inv)} style={{padding:'8px 18px',borderRadius:20,background:'#4f46e5',color:'white',border:'none',cursor:'pointer',fontWeight:600,fontSize:12}}>📄 Download NDA</button></div>)}</div></div></div>
+}
+
+// ========== RATINGS & REVIEWS ==========
+function RatingsPage({ inventions, lang, dark, setNotifications }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [ratings, setRatings] = useState(()=>{try{return JSON.parse(localStorage.getItem('inventshield_ratings')||'{}')}catch{return{}}})
+  const [review, setReview] = useState({invId:null, stars:0, text:''})
+
+  const submitReview = () => {
+    if(!review.stars || !review.text.trim()) return
+    const key = review.invId
+    const existing = ratings[key] || []
+    const updated = {...ratings, [key]: [...existing, {stars:review.stars, text:review.text, date:new Date().toLocaleDateString()}]}
+    setRatings(updated)
+    localStorage.setItem('inventshield_ratings', JSON.stringify(updated))
+    setReview({invId:null, stars:0, text:''})
+    setNotifications(prev=>['⭐ Review submitted!',...prev].slice(0,20))
+  }
+
+  const avgRating = (invId) => {
+    const r = ratings[invId] || []
+    if(r.length===0) return 0
+    return Math.round(r.reduce((s,i)=>s+i.stars,0) / r.length * 10) / 10
+  }
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:900,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>⭐ Ratings & Reviews</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Rate inventions and read what others think</p>
+
+    {!review.invId ? (
+      <div style={{display:'flex',flexDirection:'column',gap:12}}>
+        {inventions.map(inv=>{
+          const avg = avgRating(inv.id)
+          const count = (ratings[inv.id]||[]).length
+          return <div key={inv.id} style={{background:cb,borderRadius:12,padding:16}}>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+              <div>
+                <h3 style={{fontSize:15,fontWeight:600,color:txt}}>{inv.title}</h3>
+                <p style={{fontSize:11,color:sub}}>{inv.inventorName} | {inv.funding}</p>
+                <div style={{display:'flex',alignItems:'center',gap:4,marginTop:4}}>
+                  <span style={{color:'#f59e0b',fontSize:16}}>{'★'.repeat(Math.round(avg))}{'☆'.repeat(5-Math.round(avg))}</span>
+                  <span style={{fontSize:11,color:sub}}>{avg} ({count} review{count!==1?'s':''})</span>
+                </div>
+              </div>
+              <button onClick={()=>setReview({invId:inv.id,stars:0,text:''})} style={{padding:'8px 16px',borderRadius:20,background:'#4f46e5',color:'white',border:'none',cursor:'pointer',fontSize:11}}>Write Review</button>
+            </div>
+            {(ratings[inv.id]||[]).slice(0,3).map((r,i)=><div key={i} style={{marginTop:8,padding:'8px 12px',background:dark?'#111827':'#f9fafb',borderRadius:8}}><span style={{color:'#f59e0b',fontSize:12}}>{'★'.repeat(r.stars)}</span><span style={{color:sub,fontSize:9,marginLeft:6}}>{r.date}</span><p style={{fontSize:12,color:txt,marginTop:2}}>{r.text}</p></div>)}
+          </div>
+        })}
+      </div>
+    ) : (
+      <div style={{background:cb,borderRadius:14,padding:24,maxWidth:500}}>
+        <button onClick={()=>setReview({invId:null,stars:0,text:''})} style={{background:'none',border:'none',color:'#4f46e5',cursor:'pointer',fontSize:13,marginBottom:12}}>← Back</button>
+        <h3 style={{fontSize:16,fontWeight:'bold',color:txt,marginBottom:4}}>{inventions.find(i=>i.id===review.invId)?.title}</h3>
+        <div style={{margin:'12px 0'}}>
+          <p style={{fontSize:12,color:sub,marginBottom:4}}>Your Rating</p>
+          <div style={{display:'flex',gap:4}}>
+            {[1,2,3,4,5].map(s=><button key={s} onClick={()=>setReview({...review,stars:s})} style={{background:'none',border:'none',fontSize:28,cursor:'pointer',color:s<=review.stars?'#f59e0b':'#d1d5db'}}>{s<=review.stars?'★':'☆'}</button>)}
+          </div>
+        </div>
+        <textarea placeholder="Write your review..." value={review.text} onChange={e=>setReview({...review,text:e.target.value})} rows={3} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12,marginBottom:12,boxSizing:'border-box'}} />
+        <button onClick={submitReview} disabled={!review.stars||!review.text.trim()} style={{width:'100%',padding:10,borderRadius:8,background:(!review.stars||!review.text.trim())?'#d1d5db':'#4f46e5',color:'white',border:'none',cursor:(!review.stars||!review.text.trim())?'default':'pointer',fontWeight:600,fontSize:13}}>Submit Review</button>
+      </div>
+    )}
+  </div></div>
+}
+
+// ========== PDF EXPORT ==========
+function PDFExport({ inventions, lang, dark }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+
+  const exportPDF = (inv) => {
+    const content = `
+INVENTSHIELD - INVENTION REPORT
+===============================
+Title: ${inv.title}
+Status: ${inv.status.toUpperCase()}
+Inventor: ${inv.inventorName}
+Tag: ${inv.tag}
+Funding: ${inv.funding}
+Description: ${inv.description}
+Blockchain: ${inv.blockchainAnchored?'Verified':'Not Verified'}
+Crowdfunding: ${inv.crowdfunding?.active?`$${inv.crowdfunding.raised.toLocaleString()} raised of $${inv.crowdfunding.goal.toLocaleString()}`:'Not active'}
+Contributors: ${inv.contributors.map(c=>c.name).join(', ')}
+Documents: ${inv.documents.join(', ')||'None'}
+Date: ${new Date().toLocaleDateString()}
+Generated by InventShield
+    `.trim()
+    const blob = new Blob([content],{type:'text/plain'})
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(blob)
+    a.download = inv.title.replace(/\s/g,'_')+'_Report.txt'
+    a.click()
+  }
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:900,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>📥 Export Reports</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Download invention reports as PDF/TXT</p>
+    <div style={{display:'flex',flexDirection:'column',gap:12}}>
+      {inventions.map(inv=><div key={inv.id} style={{background:cb,borderRadius:12,padding:16,display:'flex',justifyContent:'space-between',alignItems:'center',flexWrap:'wrap',gap:8}}>
+        <div><h3 style={{fontSize:15,fontWeight:600,color:txt}}>{inv.title}</h3><p style={{fontSize:11,color:sub}}>{inv.inventorName} | {inv.funding} | {inv.documents?.length||0} docs</p></div>
+        <button onClick={()=>exportPDF(inv)} style={{padding:'8px 16px',borderRadius:20,background:'#4f46e5',color:'white',border:'none',cursor:'pointer',fontWeight:600,fontSize:11}}>📥 Export Report</button>
+      </div>)}
+    </div>
+  </div></div>
+}
+
+// ========== REFERRAL PROGRAM ==========
+function ReferralPage({ lang, dark, setNotifications }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [referrals, setReferrals] = useState(()=>{try{return JSON.parse(localStorage.getItem('inventshield_referrals')||'[]')}catch{return[]}})
+  const [refName, setRefName] = useState('')
+  const referralCode = 'INVSHIELD-' + Math.random().toString(36).substring(2,8).toUpperCase()
+  const referralLink = window.location.origin + '/login?ref=' + referralCode
+  const credits = referrals.length * 5
+
+  const addReferral = () => {
+    if(!refName.trim()) return
+    setReferrals([...referrals, {name:refName, date:new Date().toLocaleDateString(), code:referralCode}])
+    localStorage.setItem('inventshield_referrals', JSON.stringify([...referrals, {name:refName, date:new Date().toLocaleDateString(), code:referralCode}]))
+    setRefName('')
+    setNotifications(prev=>['🎉 Referral added! You earned $5 credit.',...prev].slice(0,20))
+  }
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:900,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>🎁 Referral Program</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Invite inventors — earn $5 credit per referral</p>
+
+    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(280px, 1fr))',gap:16,marginBottom:20}}>
+      <div style={{background:cb,borderRadius:14,padding:20,textAlign:'center'}}>
+        <p style={{fontSize:40,marginBottom:4}}>🎁</p>
+        <p style={{fontSize:24,fontWeight:'bold',color:'#4f46e5'}}>${credits}</p>
+        <p style={{fontSize:11,color:sub}}>Total Credits Earned</p>
+      </div>
+      <div style={{background:cb,borderRadius:14,padding:20,textAlign:'center'}}>
+        <p style={{fontSize:40,marginBottom:4}}>👥</p>
+        <p style={{fontSize:24,fontWeight:'bold',color:'#16a34a'}}>{referrals.length}</p>
+        <p style={{fontSize:11,color:sub}}>People Referred</p>
+      </div>
+    </div>
+
+    <div style={{background:cb,borderRadius:14,padding:20,marginBottom:20}}>
+      <h3 style={{fontSize:14,fontWeight:600,color:txt,marginBottom:8}}>Your Referral Code</h3>
+      <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+        <code style={{flex:1,padding:10,background:dark?'#111827':'#f9fafb',borderRadius:8,fontSize:14,color:'#4f46e5',fontWeight:'bold',textAlign:'center'}}>{referralCode}</code>
+        <button onClick={()=>{navigator.clipboard.writeText(referralLink);alert('Referral link copied!')}} style={{padding:'10px 16px',borderRadius:8,background:'#4f46e5',color:'white',border:'none',cursor:'pointer',fontSize:12}}>Copy Link</button>
+      </div>
+    </div>
+
+    <div style={{background:cb,borderRadius:14,padding:20,marginBottom:20}}>
+      <h3 style={{fontSize:14,fontWeight:600,color:txt,marginBottom:8}}>Add Referral</h3>
+      <div style={{display:'flex',gap:8}}>
+        <input placeholder="Friend's name or email" value={refName} onChange={e=>setRefName(e.target.value)} style={{flex:1,padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12}} />
+        <button onClick={addReferral} disabled={!refName.trim()} style={{padding:'10px 20px',borderRadius:8,background:refName.trim()?'#16a34a':'#d1d5db',color:'white',border:'none',cursor:refName.trim()?'pointer':'default',fontWeight:600,fontSize:12}}>Add</button>
+      </div>
+    </div>
+
+    {referrals.length>0 && <div style={{background:cb,borderRadius:14,padding:20}}>
+      <h3 style={{fontSize:14,fontWeight:600,color:txt,marginBottom:8}}>Referral History</h3>
+      {referrals.map((r,i)=><div key={i} style={{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:i<referrals.length-1?'1px solid '+(dark?'#374151':'#e5e7eb'):'none',fontSize:12,color:txt}}><span>{r.name}</span><span style={{color:sub}}>{r.date}</span><span style={{color:'#16a34a',fontWeight:600}}>+$5</span></div>)}
+    </div>}
+  </div></div>
+}
+
+// ========== FUNDING CALCULATOR ==========
+function FundingCalc({ lang, dark }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [inv, setInv] = useState(10000)
+  const [share, setShare] = useState(10)
+  const [growth, setGrowth] = useState(20)
+
+  const investorReturn = (inv * (share/100)) * (1 + growth/100)
+  const platformFee = inv * 0.05
+  const inventorGets = inv - platformFee
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:600,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>📊 Funding Calculator</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:20}}>Estimate returns for investors</p>
+
+    <div style={{background:cb,borderRadius:14,padding:24,marginBottom:16}}>
+      <label style={{fontSize:12,color:txt,display:'block',marginBottom:4}}>Investment Amount: <b>${inv.toLocaleString()}</b></label>
+      <input type="range" min="1000" max="100000" step="1000" value={inv} onChange={e=>setInv(parseInt(e.target.value))} style={{width:'100%',marginBottom:16}} />
+      
+      <label style={{fontSize:12,color:txt,display:'block',marginBottom:4}}>Equity Share: <b>{share}%</b></label>
+      <input type="range" min="1" max="50" value={share} onChange={e=>setShare(parseInt(e.target.value))} style={{width:'100%',marginBottom:16}} />
+      
+      <label style={{fontSize:12,color:txt,display:'block',marginBottom:4}}>Projected Growth: <b>{growth}%</b></label>
+      <input type="range" min="0" max="100" step="5" value={growth} onChange={e=>setGrowth(parseInt(e.target.value))} style={{width:'100%',marginBottom:16}} />
+    </div>
+
+    <div style={{display:'grid',gridTemplateColumns:'repeat(auto-fill, minmax(140px, 1fr))',gap:10}}>
+      <div style={{background:cb,borderRadius:10,padding:14,textAlign:'center'}}><p style={{fontSize:18,fontWeight:'bold',color:'#16a34a'}}>${investorReturn.toLocaleString()}</p><p style={{fontSize:9,color:sub}}>Investor Return</p></div>
+      <div style={{background:cb,borderRadius:10,padding:14,textAlign:'center'}}><p style={{fontSize:18,fontWeight:'bold',color:'#4f46e5'}}>${platformFee.toLocaleString()}</p><p style={{fontSize:9,color:sub}}>Platform Fee (5%)</p></div>
+      <div style={{background:cb,borderRadius:10,padding:14,textAlign:'center'}}><p style={{fontSize:18,fontWeight:'bold',color:'#15803d'}}>${inventorGets.toLocaleString()}</p><p style={{fontSize:9,color:sub}}>Inventor Gets</p></div>
+      <div style={{background:cb,borderRadius:10,padding:14,textAlign:'center'}}><p style={{fontSize:18,fontWeight:'bold',color:'#f59e0b'}}>{share}%</p><p style={{fontSize:9,color:sub}}>Equity Given</p></div>
+    </div>
+  </div></div>
+}
+
+// ========== ACTIVITY FEED ==========
+function ActivityFeed({ inventions, lang, dark }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const allActs = inventions.flatMap(i=> (i.activities||[]).map(a=>({...a, invention:i.title, invId:i.id, status:i.status})))
+    .sort((a,b)=>b.time?.localeCompare(a.time||'')).slice(0,50)
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:800,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>📡 Activity Feed</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>All platform events in real-time</p>
+    <div style={{display:'flex',flexDirection:'column',gap:2}}>
+      {allActs.map((a,i)=><div key={i} style={{display:'flex',alignItems:'center',gap:10,padding:'10px 14px',background:cb,borderRadius:8,borderBottom:i<allActs.length-1?'1px solid '+(dark?'#374151':'#e5e7eb'):'none'}}>
+        <span style={{fontSize:18}}>{a.text?.includes('Certif')?'🔗':a.text?.includes('joined')?'👤':a.text?.includes('created')?'📝':a.text?.includes('PANIC')?'🚨':'📌'}</span>
+        <div style={{flex:1}}>
+          <span style={{fontWeight:600,color:'#4f46e5',fontSize:12}}>{a.invention}</span>
+          <span style={{color:sub,fontSize:11,marginLeft:6}}>{a.text}</span>
+        </div>
+        <span style={{fontSize:10,color:sub}}>{a.time}</span>
+      </div>)}
+      {allActs.length===0 && <p style={{textAlign:'center',color:sub,padding:40}}>No activity yet</p>}
+    </div>
+  </div></div>
+}
+
+// ========== BOOKMARKS ==========
+function BookmarksPage({ inventions, lang, dark }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [bookmarks, setBookmarks] = useState(()=>{try{return JSON.parse(localStorage.getItem('inventshield_bookmarks')||'[]')}catch{return[]}})
+  const bookmarked = inventions.filter(i=>bookmarks.includes(i.id))
+
+  const toggle = (id) => {
+    const updated = bookmarks.includes(id) ? bookmarks.filter(b=>b!==id) : [...bookmarks, id]
+    setBookmarks(updated)
+    localStorage.setItem('inventshield_bookmarks', JSON.stringify(updated))
+  }
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:900,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>🔖 Bookmarks</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Your saved inventions ({bookmarked.length})</p>
+    {bookmarked.length===0 ? <p style={{textAlign:'center',color:sub,padding:40}}>No bookmarks yet. Browse inventions and save them!</p> :
+    <div style={{display:'flex',flexDirection:'column',gap:8}}>
+      {bookmarked.map(inv=><div key={inv.id} style={{background:cb,borderRadius:10,padding:14,display:'flex',justifyContent:'space-between',alignItems:'center'}}>
+        <div><h3 style={{fontSize:14,fontWeight:600,color:txt}}>{inv.title}</h3><p style={{fontSize:11,color:sub}}>{inv.inventorName} | {inv.funding}</p></div>
+        <button onClick={()=>toggle(inv.id)} style={{background:'none',border:'none',fontSize:18,cursor:'pointer'}}>🔖</button>
+      </div>)}
+    </div>}
+    <div style={{marginTop:24}}>
+      <h3 style={{fontSize:14,fontWeight:600,color:txt,marginBottom:8}}>All Inventions</h3>
+      {inventions.filter(i=>!bookmarks.includes(i.id)).slice(0,10).map(inv=><div key={inv.id} style={{background:cb,borderRadius:10,padding:14,display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:6}}>
+        <div><h3 style={{fontSize:14,fontWeight:600,color:txt}}>{inv.title}</h3><p style={{fontSize:11,color:sub}}>{inv.inventorName} | {inv.funding}</p></div>
+        <button onClick={()=>toggle(inv.id)} style={{background:'none',border:'none',fontSize:18,cursor:'pointer',opacity:0.3}}>🔖</button>
+      </div>)}
+    </div>
+  </div></div>
+}
+
+// ========== COMPARE INVENTIONS ==========
+function ComparePage({ inventions, lang, dark }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [a, setA] = useState(null); const [b, setB] = useState(null)
+  const invA = inventions.find(i=>i.id===a)
+  const invB = inventions.find(i=>i.id===b)
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:1000,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>⚖️ Compare Inventions</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Select two inventions to compare side-by-side</p>
+    
+    <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:20}}>
+      <select value={a||''} onChange={e=>setA(parseInt(e.target.value))} style={{flex:1,padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:cb,color:txt,fontSize:13}}>
+        <option value="">Select first invention...</option>
+        {inventions.map(i=><option key={i.id} value={i.id}>{i.title}</option>)}
+      </select>
+      <select value={b||''} onChange={e=>setB(parseInt(e.target.value))} style={{flex:1,padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:cb,color:txt,fontSize:13}}>
+        <option value="">Select second invention...</option>
+        {inventions.map(i=><option key={i.id} value={i.id}>{i.title}</option>)}
+      </select>
+    </div>
+
+    {invA && invB && (
+      <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
+        {[invA, invB].map((inv,i)=><div key={i} style={{background:cb,borderRadius:12,padding:20}}>
+          <h2 style={{fontSize:18,fontWeight:'bold',color:txt,marginBottom:12}}>{inv.title}</h2>
+          {[{l:'Status',v:inv.status},{l:'Inventor',v:inv.inventorName},{l:'Tag',v:inv.tag},{l:'Funding',v:inv.funding},{l:'Progress',v:inv.progress+'%'},{l:'Contributors',v:inv.contributors.length},{l:'Documents',v:inv.documents.length},{l:'Blockchain',v:inv.blockchainAnchored?'Verified':'Not'},{l:'Crowdfunding',v:inv.crowdfunding?.active?'Active ($'+inv.crowdfunding.raised.toLocaleString()+')':'None'},{l:'Fee Waiver',v:inv.feeWaiver?'Yes':'No'}].map((r,j)=><div key={j} style={{display:'flex',justifyContent:'space-between',padding:'8px 0',borderBottom:j<9?'1px solid '+(dark?'#374151':'#e5e7eb'):'none',fontSize:12}}><span style={{color:sub}}>{r.l}</span><span style={{color:txt,fontWeight:500}}>{r.v}</span></div>)}
+        </div>)}
+      </div>
+    )}
+  </div></div>
+}
+
+// ========== PATENT SEARCH ==========
+function PatentSearch({ lang, dark }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+  const [searching, setSearching] = useState(false)
+
+  const search = () => {
+    if(!query.trim()) return
+    setSearching(true)
+    setTimeout(()=>{
+      setResults([{title:'US Patent '+Math.floor(Math.random()*9999999), inventor:'Various', date:'2024', relevance:'High', summary:'Related to '+query+'. This patent covers similar technology in the field of innovation.'},{title:'WO Patent '+Math.floor(Math.random()*999999), inventor:'International', date:'2023', relevance:'Medium', summary:'International patent application covering aspects of '+query+'.'},{title:'EP Patent '+Math.floor(Math.random()*99999), inventor:'European', date:'2025', relevance:'Low', summary:'European patent with tangential relation to '+query+'.'}])
+      setSearching(false)
+    },1500)
+  }
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:800,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>🔍 Patent Search</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Check prior art before filing your invention</p>
+    <div style={{display:'flex',gap:8,marginBottom:20}}>
+      <input value={query} onChange={e=>setQuery(e.target.value)} onKeyDown={e=>e.key==='Enter'&&search()} placeholder="Search patents by keyword..." style={{flex:1,padding:12,borderRadius:10,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:cb,color:txt,fontSize:14}} />
+      <button onClick={search} disabled={searching||!query.trim()} style={{padding:'12px 24px',borderRadius:10,background:(searching||!query.trim())?'#d1d5db':'#4f46e5',color:'white',border:'none',cursor:(searching||!query.trim())?'default':'pointer',fontWeight:600}}>{searching?'Searching...':'Search'}</button>
+    </div>
+    <p style={{fontSize:10,color:sub,marginBottom:16}}>🔗 Also try: <a href={'https://patents.google.com/?q='+encodeURIComponent(query)} target="_blank" rel="noopener" style={{color:'#4f46e5'}}>Google Patents</a></p>
+    {results.map((r,i)=><div key={i} style={{background:cb,borderRadius:10,padding:16,marginBottom:8}}>
+      <div style={{display:'flex',justifyContent:'space-between',alignItems:'flex-start',marginBottom:4}}>
+        <h3 style={{fontSize:14,fontWeight:600,color:txt}}>{r.title}</h3>
+        <span style={{padding:'2px 8px',borderRadius:9999,fontSize:9,fontWeight:'bold',background:r.relevance==='High'?'#fef3c7':r.relevance==='Medium'?'#eef2ff':'#f3f4f6',color:r.relevance==='High'?'#92400e':r.relevance==='Medium'?'#4f46e5':'#6b7280'}}>{r.relevance} Relevance</span>
+      </div>
+      <p style={{fontSize:11,color:sub}}>{r.inventor} | {r.date}</p>
+      <p style={{fontSize:12,color:txt,marginTop:4}}>{r.summary}</p>
+    </div>)}
+  </div></div>
+}
+
+// ========== TEAM MANAGEMENT ==========
+function TeamPage({ inventions, setInventions, lang, dark, setNotifications }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [newMember, setNewMember] = useState({invId:null, name:'', role:'Contributor'})
+
+  const addMember = () => {
+    if(!newMember.name.trim()||!newMember.invId) return
+    setInventions(prev=>prev.map(i=>i.id===newMember.invId?{...i, contributors:[...i.contributors,{name:newMember.name,role:newMember.role,share:5,avatar:newMember.name[0].toUpperCase(),userId:'user'+Date.now()}], activities:[...i.activities,{text:newMember.name+' joined as '+newMember.role,time:'Just now'}]}:i))
+    setNewMember({invId:null,name:'',role:'Contributor'})
+    setNotifications(prev=>['👤 Team member added!',...prev].slice(0,20))
+  }
+
+  const removeMember = (invId, memberIdx) => {
+    if(!confirm('Remove this team member?')) return
+    setInventions(prev=>prev.map(i=>i.id===invId?{...i, contributors:i.contributors.filter((_,idx)=>idx!==memberIdx)}:i))
+    setNotifications(prev=>['Removed team member.',...prev].slice(0,20))
+  }
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:900,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>👥 Team Management</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Manage contributors for each invention</p>
+
+    <div style={{background:cb,borderRadius:14,padding:20,marginBottom:20}}>
+      <h3 style={{fontSize:14,fontWeight:600,color:txt,marginBottom:12}}>Add Team Member</h3>
+      <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:8}}>
+        <select value={newMember.invId||''} onChange={e=>setNewMember({...newMember,invId:parseInt(e.target.value)})} style={{flex:1,padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12}}>
+          <option value="">Select invention...</option>
+          {inventions.map(i=><option key={i.id} value={i.id}>{i.title}</option>)}
+        </select>
+      </div>
+      <div style={{display:'flex',gap:8,flexWrap:'wrap'}}>
+        <input placeholder="Name" value={newMember.name} onChange={e=>setNewMember({...newMember,name:e.target.value})} style={{flex:2,padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12}} />
+        <select value={newMember.role} onChange={e=>setNewMember({...newMember,role:e.target.value})} style={{flex:1,padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12}}>
+          <option>Contributor</option><option>Reviewer</option><option>Co-Inventor</option><option>Advisor</option>
+        </select>
+        <button onClick={addMember} disabled={!newMember.name.trim()||!newMember.invId} style={{padding:'10px 20px',borderRadius:8,background:(!newMember.name.trim()||!newMember.invId)?'#d1d5db':'#16a34a',color:'white',border:'none',cursor:(!newMember.name.trim()||!newMember.invId)?'default':'pointer',fontWeight:600,fontSize:12}}>Add</button>
+      </div>
+    </div>
+
+    {inventions.map(inv=><div key={inv.id} style={{background:cb,borderRadius:12,padding:16,marginBottom:12}}>
+      <h3 style={{fontSize:15,fontWeight:600,color:txt,marginBottom:8}}>{inv.title} ({inv.contributors.length} members)</h3>
+      {inv.contributors.map((c,i)=><div key={i} style={{display:'flex',justifyContent:'space-between',alignItems:'center',padding:'8px 0',borderBottom:i<inv.contributors.length-1?'1px solid '+(dark?'#374151':'#e5e7eb'):'none'}}>
+        <div style={{display:'flex',alignItems:'center',gap:8}}>
+          <div style={{width:30,height:30,borderRadius:'50%',background:'#eef2ff',display:'flex',alignItems:'center',justifyContent:'center',fontSize:12,fontWeight:'bold',color:'#4f46e5'}}>{c.avatar}</div>
+          <div><span style={{fontSize:13,color:txt,fontWeight:500}}>{c.name}</span><span style={{fontSize:10,color:sub,marginLeft:6}}>{c.role} | {c.share}% share</span></div>
+        </div>
+        {c.role!=='Inventor'&&<button onClick={()=>removeMember(inv.id,i)} style={{color:'#ef4444',background:'none',border:'none',cursor:'pointer',fontSize:11}}>Remove</button>}
+      </div>)}
+    </div>)}
+  </div></div>
+}
+
+// ========== MILESTONE TRACKER ==========
+function MilestonesPage({ inventions, setInventions, lang, dark, setNotifications }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [milestones, setMilestones] = useState(()=>{try{return JSON.parse(localStorage.getItem('inventshield_milestones')||'{}')}catch{return{}}})
+  const [newMS, setNewMS] = useState({invId:null, text:'', target:'', completed:false})
+
+  const addMilestone = () => {
+    if(!newMS.text.trim()||!newMS.invId) return
+    const key = newMS.invId
+    const updated = {...milestones, [key]:[...(milestones[key]||[]),{text:newMS.text,target:newMS.target,completed:false,date:new Date().toLocaleDateString()}]}
+    setMilestones(updated)
+    localStorage.setItem('inventshield_milestones', JSON.stringify(updated))
+    setNewMS({invId:null,text:'',target:'',completed:false})
+    setNotifications(prev=>['🎯 Milestone added!',...prev].slice(0,20))
+  }
+
+  const toggleMS = (invId, idx) => {
+    const key = invId; const list = [...(milestones[key]||[])]
+    list[idx].completed = !list[idx].completed
+    const updated = {...milestones, [key]:list}
+    setMilestones(updated)
+    localStorage.setItem('inventshield_milestones', JSON.stringify(updated))
+  }
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:900,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>🎯 Milestones</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Track invention development goals</p>
+
+    <div style={{background:cb,borderRadius:14,padding:20,marginBottom:20}}>
+      <h3 style={{fontSize:14,fontWeight:600,color:txt,marginBottom:12}}>Add Milestone</h3>
+      <select value={newMS.invId||''} onChange={e=>setNewMS({...newMS,invId:parseInt(e.target.value)})} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12,marginBottom:8}}>
+        <option value="">Select invention...</option>
+        {inventions.map(i=><option key={i.id} value={i.id}>{i.title}</option>)}
+      </select>
+      <input placeholder="Milestone description" value={newMS.text} onChange={e=>setNewMS({...newMS,text:e.target.value})} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12,marginBottom:8}} />
+      <input placeholder="Target date (e.g. June 2026)" value={newMS.target} onChange={e=>setNewMS({...newMS,target:e.target.value})} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12,marginBottom:8}} />
+      <button onClick={addMilestone} disabled={!newMS.text.trim()||!newMS.invId} style={{width:'100%',padding:10,borderRadius:8,background:(!newMS.text.trim()||!newMS.invId)?'#d1d5db':'#4f46e5',color:'white',border:'none',cursor:(!newMS.text.trim()||!newMS.invId)?'default':'pointer',fontWeight:600}}>Add Milestone</button>
+    </div>
+
+    {inventions.map(inv=>{
+      const ms = milestones[inv.id]||[]
+      if(ms.length===0) return null
+      const done = ms.filter(m=>m.completed).length
+      return <div key={inv.id} style={{background:cb,borderRadius:12,padding:16,marginBottom:12}}>
+        <div style={{display:'flex',justifyContent:'space-between',alignItems:'center',marginBottom:8}}>
+          <h3 style={{fontSize:15,fontWeight:600,color:txt}}>{inv.title}</h3>
+          <span style={{fontSize:11,color:sub}}>{done}/{ms.length} done</span>
+        </div>
+        <div style={{width:'100%',background:dark?'#374151':'#e5e7eb',borderRadius:9999,height:6,marginBottom:10}}><div style={{background:'#4f46e5',height:6,borderRadius:9999,width:`${(done/ms.length)*100}%`}}></div></div>
+        {ms.map((m,i)=><div key={i} onClick={()=>toggleMS(inv.id,i)} style={{display:'flex',alignItems:'center',gap:8,padding:'8px 0',borderBottom:i<ms.length-1?'1px solid '+(dark?'#374151':'#e5e7eb'):'none',cursor:'pointer'}}>
+          <span style={{fontSize:16}}>{m.completed?'✅':'⬜'}</span>
+          <div style={{flex:1}}><span style={{fontSize:12,color:txt,textDecoration:m.completed?'line-through':'none'}}>{m.text}</span></div>
+          <span style={{fontSize:10,color:sub}}>{m.target}</span>
+        </div>)}
+      </div>
+    })}
+  </div></div>
+}
+
+// ========== EMAIL SIMULATION ==========
+function EmailCenter({ lang, dark, setNotifications }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [emails, setEmails] = useState(()=>{try{return JSON.parse(localStorage.getItem('inventshield_emails')||'[]')}catch{return[]}})
+  const [compose, setCompose] = useState({to:'',subject:'',body:''})
+
+  const sendEmail = () => {
+    if(!compose.to.trim()||!compose.subject.trim()) return
+    const email = {...compose, date:new Date().toLocaleString(), status:'sent', id:Date.now()}
+    setEmails([email,...emails])
+    localStorage.setItem('inventshield_emails', JSON.stringify([email,...emails]))
+    setCompose({to:'',subject:'',body:''})
+    setNotifications(prev=>['📧 Email sent to '+compose.to,...prev].slice(0,20))
+  }
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:900,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>📧 Email Center</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>Send and track investor/inventor communications</p>
+
+    <div style={{background:cb,borderRadius:14,padding:20,marginBottom:20}}>
+      <h3 style={{fontSize:14,fontWeight:600,color:txt,marginBottom:12}}>Compose Email</h3>
+      <input placeholder="To: investor@example.com" value={compose.to} onChange={e=>setCompose({...compose,to:e.target.value})} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12,marginBottom:8,boxSizing:'border-box'}} />
+      <input placeholder="Subject" value={compose.subject} onChange={e=>setCompose({...compose,subject:e.target.value})} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12,marginBottom:8,boxSizing:'border-box'}} />
+      <textarea placeholder="Message..." value={compose.body} onChange={e=>setCompose({...compose,body:e.target.value})} rows={4} style={{width:'100%',padding:10,borderRadius:8,border:'1px solid '+(dark?'#374151':'#d1d5db'),background:bg,color:txt,fontSize:12,marginBottom:8,boxSizing:'border-box'}} />
+      <button onClick={sendEmail} disabled={!compose.to.trim()||!compose.subject.trim()} style={{width:'100%',padding:10,borderRadius:8,background:(!compose.to.trim()||!compose.subject.trim())?'#d1d5db':'#4f46e5',color:'white',border:'none',cursor:(!compose.to.trim()||!compose.subject.trim())?'default':'pointer',fontWeight:600}}>Send Email</button>
+    </div>
+
+    <h3 style={{fontSize:14,fontWeight:600,color:txt,marginBottom:8}}>Sent Emails ({emails.length})</h3>
+    {emails.length===0?<p style={{color:sub,fontSize:12,textAlign:'center',padding:20}}>No emails sent yet</p>:
+    emails.map(e=><div key={e.id} style={{background:cb,borderRadius:8,padding:12,marginBottom:6}}>
+      <div style={{display:'flex',justifyContent:'space-between',fontSize:11,color:sub,marginBottom:2}}><span>To: {e.to}</span><span>{e.date}</span></div>
+      <p style={{fontSize:13,fontWeight:600,color:txt}}>{e.subject}</p>
+      <p style={{fontSize:11,color:sub}}>{e.body?.slice(0,80)}...</p>
+    </div>)}
+  </div></div>
+}
+
+// ========== NOTIFICATION HISTORY ==========
+function NotificationHistory({ lang, dark }) {
+  const bg=dark?'#111827':'#f9fafb'; const cb=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#111827'; const sub=dark?'#d1d5db':'#6b7280'
+  const [history, setHistory] = useState(()=>{try{return JSON.parse(localStorage.getItem('inventshield_notif_history')||'[]')}catch{return[]}})
+
+  return <div style={{minHeight:'100vh',background:bg,padding:'16px 16px 80px'}}><div style={{maxWidth:700,margin:'0 auto'}}>
+    <h1 style={{fontSize:26,fontWeight:'bold',color:txt,marginBottom:4}}>🔔 Notification History</h1>
+    <p style={{color:sub,fontSize:13,marginBottom:16}}>{history.length} total notifications</p>
+    {history.length===0?<p style={{textAlign:'center',color:sub,padding:40}}>No notifications yet</p>:
+    <div style={{display:'flex',flexDirection:'column',gap:4}}>
+      {history.map((n,i)=><div key={i} style={{background:cb,borderRadius:8,padding:'10px 14px',fontSize:12,color:txt,borderLeft:'3px solid #4f46e5'}}>{n}</div>)}
+    </div>}
+    <button onClick={()=>{localStorage.removeItem('inventshield_notif_history');setHistory([])}} style={{marginTop:12,padding:'8px 16px',borderRadius:8,background:'#fee2e2',color:'#dc2626',border:'none',cursor:'pointer',fontSize:11}}>Clear All</button>
+  </div></div>
+}
+
+// ========== QUICK ACTIONS WIDGET ==========
+function QuickActions({ lang, dark }) {
+  const nav = useNavigate()
+  const [open, setOpen] = useState(false)
+  const actions = [
+    {icon:'➕',label:'Add',path:'/add',color:'#16a34a'},{icon:'⭐',label:'Rate',path:'/ratings',color:'#f59e0b'},
+    {icon:'📤',label:'Share',path:'/share',color:'#2563eb'},{icon:'📄',label:'NDA',path:'/nda',color:'#4f46e5'},
+    {icon:'📊',label:'Calc',path:'/calc',color:'#0891b2'},{icon:'🔍',label:'Patent',path:'/patents',color:'#9333ea'}
+  ]
+
+  return <div style={{position:'fixed',bottom:90,right:16,zIndex:140}}>
+    {open && <div style={{display:'flex',flexDirection:'column',gap:6,marginBottom:8}}>
+      {actions.map(a=><button key={a.path} onClick={()=>{nav(a.path);setOpen(false)}} style={{width:44,height:44,borderRadius:'50%',background:a.color,color:'white',border:'none',fontSize:18,cursor:'pointer',boxShadow:'0 4px 12px rgba(0,0,0,0.2)',display:'flex',alignItems:'center',justifyContent:'center'}} title={a.label}>{a.icon}</button>)}
+    </div>}
+    <button onClick={()=>setOpen(!open)} style={{width:48,height:48,borderRadius:'50%',background:open?'#ef4444':'#4f46e5',color:'white',border:'none',fontSize:22,cursor:'pointer',boxShadow:'0 4px 15px rgba(79,70,229,0.4)',display:'flex',alignItems:'center',justifyContent:'center',transition:'all 0.3s',transform:open?'rotate(45deg)':'rotate(0deg)'}}>+</button>
+  </div>
 }
