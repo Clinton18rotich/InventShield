@@ -973,3 +973,92 @@ function QuickActions({ lang, dark }) {
     <button onClick={()=>setOpen(!open)} style={{width:48,height:48,borderRadius:'50%',background:open?'#ef4444':'#4f46e5',color:'white',border:'none',fontSize:22,cursor:'pointer',boxShadow:'0 4px 15px rgba(79,70,229,0.4)',display:'flex',alignItems:'center',justifyContent:'center',transition:'all 0.3s',transform:open?'rotate(45deg)':'rotate(0deg)'}}>+</button>
   </div>
 }
+
+// ========== UI POLISH COMPONENTS ==========
+
+// Smooth page transitions wrapper
+function PageTransition({ children }) {
+  const [visible, setVisible] = useState(false)
+  useEffect(() => { setTimeout(() => setVisible(true), 50) }, [])
+  return <div style={{opacity:visible?1:0, transform:visible?'translateY(0)':'translateY(10px)', transition:'opacity 0.3s ease, transform 0.3s ease'}}>{children}</div>
+}
+
+// Animated stat card
+function StatCard({ value, label, color, icon, dark }) {
+  const [hover, setHover] = useState(false)
+  const cb = dark?'#1f2937':'white'
+  return <div onMouseEnter={()=>setHover(true)} onMouseLeave={()=>setHover(false)} style={{background:cb,borderRadius:12,padding:16,textAlign:'center',cursor:'pointer',transition:'all 0.2s',transform:hover?'translateY(-4px)':'translateY(0)',boxShadow:hover?'0 8px 25px rgba(0,0,0,0.12)':'0 1px 3px rgba(0,0,0,0.05)',border:'1px solid '+(dark?'#374151':'#e5e7eb')}}>
+    {icon && <span style={{fontSize:24,display:'block',marginBottom:4}}>{icon}</span>}
+    <p style={{fontSize:22,fontWeight:'bold',color:color||'#4f46e5',transition:'all 0.2s',transform:hover?'scale(1.1)':'scale(1)'}}>{value}</p>
+    <p style={{fontSize:10,color:dark?'#d1d5db':'#6b7280'}}>{label}</p>
+  </div>
+}
+
+// Pulse animation for live indicators
+function LiveDot({ color }) {
+  return <span style={{display:'inline-block',width:8,height:8,borderRadius:'50%',background:color||'#16a34a',marginRight:6,animation:'pulse 2s infinite'}} />
+}
+
+// Skeleton loader
+function Skeleton({ width, height }) {
+  return <div style={{width:width||'100%',height:height||20,background:'linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%)',backgroundSize:'200% 100%',animation:'shimmer 1.5s infinite',borderRadius:8}} />
+}
+
+// Badge component
+function Badge({ text, color, bg }) {
+  return <span style={{display:'inline-block',padding:'3px 10px',borderRadius:9999,fontSize:10,fontWeight:'bold',background:bg||'#eef2ff',color:color||'#4f46e5'}}>{text}</span>
+}
+
+// Toast notification
+function Toast({ message, type, onClose }) {
+  const colors = {success:'#dcfce7', error:'#fef2f2', info:'#eef2ff', warning:'#fefce8'}
+  const textColors = {success:'#15803d', error:'#dc2626', info:'#4f46e5', warning:'#92400e'}
+  return <div style={{position:'fixed',top:70,right:16,zIndex:200,background:colors[type]||colors.info,borderRadius:12,padding:'12px 20px',boxShadow:'0 10px 30px rgba(0,0,0,0.15)',display:'flex',alignItems:'center',gap:10,animation:'slideIn 0.3s ease',maxWidth:350}}>
+    <span>{type==='success'?'✅':type==='error'?'❌':type==='warning'?'⚠️':'ℹ️'}</span>
+    <span style={{fontSize:13,color:textColors[type]||textColors.info,flex:1}}>{message}</span>
+    <button onClick={onClose} style={{background:'none',border:'none',color:textColors[type],cursor:'pointer',fontSize:16}}>×</button>
+  </div>
+}
+
+// Progress ring
+function ProgressRing({ pct, size, stroke }) {
+  const r = (size||60)/2 - (stroke||4)
+  const circ = 2 * Math.PI * r
+  return <svg width={size||60} height={size||60} style={{transform:'rotate(-90deg)'}}>
+    <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#e5e7eb" strokeWidth={stroke||4} />
+    <circle cx={size/2} cy={size/2} r={r} fill="none" stroke="#4f46e5" strokeWidth={stroke||4} strokeDasharray={circ} strokeDashoffset={circ - (pct/100)*circ} strokeLinecap="round" style={{transition:'stroke-dashoffset 0.5s ease'}} />
+    <text x="50%" y="50%" textAnchor="middle" dy=".3em" fontSize={size/5} fill="#4f46e5" fontWeight="bold" transform={`rotate(90, ${size/2}, ${size/2})`}>{pct}%</text>
+  </svg>
+}
+
+// Divider
+function Divider({ dark, label }) {
+  return <div style={{display:'flex',alignItems:'center',gap:12,margin:'16px 0'}}>
+    <div style={{flex:1,height:1,background:dark?'#374151':'#e5e7eb'}}></div>
+    {label && <span style={{fontSize:11,color:dark?'#d1d5db':'#9ca3af'}}>{label}</span>}
+    <div style={{flex:1,height:1,background:dark?'#374151':'#e5e7eb'}}></div>
+  </div>
+}
+
+// Empty state
+function EmptyState({ icon, title, desc, action, actionLabel, onAction }) {
+  return <div style={{textAlign:'center',padding:40}}>
+    <span style={{fontSize:48,display:'block',marginBottom:12}}>{icon||'📭'}</span>
+    <h3 style={{fontSize:16,fontWeight:600,color:'#374151',marginBottom:4}}>{title||'Nothing here yet'}</h3>
+    <p style={{fontSize:12,color:'#9ca3af',marginBottom:16}}>{desc||''}</p>
+    {action && <button onClick={onAction} style={{padding:'8px 20px',borderRadius:20,background:'#4f46e5',color:'white',border:'none',cursor:'pointer',fontSize:13}}>{actionLabel||'Get Started'}</button>}
+  </div>
+}
+
+// Confetti effect on achievement
+function Confetti() {
+  const [particles, setParticles] = useState([])
+  useEffect(()=>{
+    const p = Array.from({length:30},(_,i)=>({id:i,x:Math.random()*100,y:-20,color:['#4f46e5','#f59e0b','#16a34a','#ef4444','#8b5cf6'][i%5],size:4+Math.random()*8,speed:2+Math.random()*3}))
+    setParticles(p)
+    setTimeout(()=>setParticles([]),3000)
+  },[])
+  return <div style={{position:'fixed',inset:0,zIndex:300,pointerEvents:'none'}}>
+    {particles.map(p=><div key={p.id} style={{position:'absolute',left:p.x+'%',top:p.y+'%',width:p.size,height:p.size*1.5,background:p.color,borderRadius:2,animation:'fall 3s linear forwards',animationDelay:p.speed*0.1+'s'}} />)}
+  </div>
+}
