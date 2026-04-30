@@ -161,7 +161,7 @@ function NotificationBell({ notifications, dark, lang }) {
 
 function LanguageSelector({ lang, setLang, dark }) {
   const bg=dark?'#1f2937':'white'; const txt=dark?'#f9fafb':'#4b5563'
-  const langs = [{code:"en",label:"EN"},{code:"sw",label:"SW"},{code:"es",label:"ES"},{code:"fr",label:"FR"},{code:"zh",label:"ZH"},{code:"ar",label:"AR"},{code:"hi",label:"HI"},{code:"pt",label:"PT"},{code:"de",label:"DE"},{code:"ja",label:"JA"}]
+  const langs = [{code:'en',label:'EN'},{code:'es',label:'ES'},{code:'fr',label:'FR'},{code:'sw',label:'SW'},{code:'zh',label:'ZH'}]
   const [open, setOpen] = useState(false); const ref = useRef(null)
   useEffect(()=>{ const h=(e)=>{if(ref.current&&!ref.current.contains(e.target))setOpen(false)}; document.addEventListener('mousedown',h); return ()=>document.removeEventListener('mousedown',h) },[])
   return (<div ref={ref} style={{position:'relative'}}><button onClick={()=>setOpen(!open)} style={{padding:'6px 10px',borderRadius:8,border:dark?'1px solid #374151':'1px solid #d1d5db',background:bg,color:txt,fontSize:12,cursor:'pointer'}}>{langs.find(l=>l.code===lang)?.label}</button>
