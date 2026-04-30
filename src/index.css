@@ -55,3 +55,11 @@ button:active { transform: scale(0.97); }
 @media (prefers-color-scheme: dark) {
   ::-webkit-scrollbar-thumb { background: #374151; }
 }
+@keyframes slideUpTour {
+  from { transform: translateY(100px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
