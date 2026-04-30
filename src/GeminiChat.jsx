@@ -4,7 +4,7 @@ function getResponse(query) {
   const ql = query.toLowerCase().trim()
   
   if (ql.length < 3) return "Tell me more! I'm listening."
-  if (/^(wow|great|nice|awesome|amazing|cool|good|fantastic|excellent|love|brilliant|superb|perfect)/.test(ql)) return "Thank you so much! That really means a lot. I'm here to help anytime you need me. What would you like to explore next?"
+  if (/^(wow|great|nice|awesome|amazing|cool|fantastic|excellent|love|brilliant|superb|perfect)/.test(ql)) return "Thank you so much! That really means a lot. I'm here to help anytime you need me. What would you like to explore next?"
   if (/^(ok|okay|yes|yeah|yep|sure|alright|fine|hmm|mmm|oh|ah|i see|right|got it)/.test(ql)) return "Got it! Is there something specific you'd like to know more about? I can walk you through protection features, crowdfunding, or submitting your invention."
   if (/^(no|nope|nah|not really|nothing)/.test(ql)) return "No worries at all! Take your time. I'm here whenever you're ready."
   if (/^(sorry|apologize|my bad|excuse)/.test(ql)) return "No need to apologize! I'm here to help, not judge. What can I do for you?"
